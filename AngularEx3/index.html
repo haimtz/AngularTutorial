@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html ng-app="sportStore" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Sport store</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <script src="Scripts/angular.js"></script>
+    <script src="controllers/sportsStore.js"></script>
+    <script src="filters/customFilters.js"></script>
+
+</head>
+<body ng-controller="sportsStoreCtrl">
+<div class="navbar navbar-inverse">
+    <a class="navbar-brand" href="#">SPORTS STORE</a>
+</div>
+<div class="panel panel-default row" ng-controller="productListCtrl">
+    <div class="col-xs-3">
+        <a ng-click="selectCategory()" class="btn btn-block btn-default btn-lg">Home</a>
+        <a ng-repeat="item in data.products | orderBy: 'category' | unique: 'category'"
+           ng-click="selectCategory(item)"
+           ng-class="getCategoryClass(item)"
+           class=" btn btn-block btn-default btn-lg">
+            {{ item }}
+        </a>
+    </div>
+    <div class="col-xs-8">
+        <div class="well ng-scope" ng-repeat="item in data.products | filter: categoryFilterFn">
+            <h3>
+                <strong class="ng-binding">{{ item.name }}</strong>
+                <span class="pull-right label label-primary ng-binding">{{ item.price | currency }} </span>
+            </h3>
+            <span class="lead ng-binding">{{ item.description }}</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+ <!--stopped at page 144-->
